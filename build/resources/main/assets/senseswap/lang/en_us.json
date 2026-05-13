@@ -1,0 +1,51 @@
+{
+  "senseswap.role.blind": "Blind",
+  "senseswap.role.deaf": "Deaf",
+  "senseswap.role.mute": "Mute",
+  "senseswap.role.none": "No Role",
+
+  "senseswap.command.started": "Game started! Roles assigned.",
+  "senseswap.command.stopped": "Game stopped. All roles cleared.",
+  "senseswap.command.role_set": "Role set: %s → %s",
+  "senseswap.command.role_cleared": "Role cleared for %s.",
+  "senseswap.command.reloaded": "Roles reloaded from world save.",
+  "senseswap.command.need_players": "Need at least 3 players to start!",
+  "senseswap.command.player_not_found": "Player not found: %s",
+  "senseswap.command.invalid_role": "Invalid role: %s. Use BLIND, DEAF, or MUTE.",
+  "senseswap.command.no_roles": "No roles currently assigned.",
+  "senseswap.command.status_header": "=== Current Roles ===",
+  "senseswap.command.session_time": "Session time: %d min %d sec",
+
+  "senseswap.message.role_restored": "Your role has been restored: %s",
+
+  "senseswap.gui.title": "SenseSwap Settings",
+  "senseswap.gui.hud_enabled": "Show HUD",
+  "senseswap.gui.hud_scale": "HUD Scale",
+  "senseswap.gui.hud_position": "HUD Position",
+  "senseswap.gui.hud_pos_top_left": "Top Left",
+  "senseswap.gui.hud_pos_top_right": "Top Right",
+  "senseswap.gui.hud_pos_bottom_left": "Bottom Left",
+  "senseswap.gui.hud_pos_bottom_right": "Bottom Right",
+  "senseswap.gui.blind_effect": "Blind Effect Strength",
+  "senseswap.gui.fog_intensity": "Fog Intensity",
+  "senseswap.gui.done": "Done",
+  "senseswap.gui.cancel": "Cancel",
+  "senseswap.gui.reset": "Reset to Default",
+  "senseswap.gui.section_visual": "Visual Settings",
+  "senseswap.gui.section_game": "Game Settings",
+  "senseswap.gui.auto_assign": "Auto-assign roles on game start",
+  "senseswap.gui.show_role_popup": "Show role popup on assignment",
+  "senseswap.gui.role_popup_duration": "Role popup duration (seconds)",
+
+  "senseswap.key.open_settings": "Open Settings",
+  "senseswap.key.category": "SenseSwap",
+
+  "modmenu.nameTranslation.senseswap": "SenseSwap",
+  "modmenu.descriptionTranslation.senseswap": "Role-based party mod. v3.0: server-authoritative, roles persist across reconnects.",
+
+  "senseswap.popup.title": "Role Assigned!",
+  "senseswap.popup.desc.blind": "You cannot see anything. The world is dark.",
+  "senseswap.popup.desc.deaf": "You cannot hear. Voice chat is blocked.",
+  "senseswap.popup.desc.mute": "You cannot speak. Microphone is blocked.",
+  "senseswap.popup.closes": "Closes in %d s"
+}
