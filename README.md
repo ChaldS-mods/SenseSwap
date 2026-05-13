@@ -1,4 +1,4 @@
-# SenseSwap
+# SenseSwap 3.5 beta
 
 > **GitHub:** https://github.com/ChaldS-mods/SenseSwap  
 > **Author:** ChaldS
