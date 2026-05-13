@@ -7,7 +7,7 @@ Author: ChaldS
 Building from source
 Requirements
 
-Java 21 — download
+Java 21 — [download](https://adoptium.net/temurin/releases/?version=21)
 
 Windows
 
