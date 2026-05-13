@@ -1,114 +1,76 @@
-# SenseSwap Mod v3.0.0
 
-> **GitHub:** https://github.com/ChaldS-mods/SenseSwap
-**Author: ChaldS**
+SenseSwap:
+GitHub: https://github.com/ChaldS-mods/SenseSwap
+Author: ChaldS
 
----
 
-## Что нового в v3.0 / What's new in v3.0
+Building from source
+Requirements
 
-### ✅ Серверная авторизация (Server-authoritative roles)
-В v2.0 роли хранились только на клиенте — сервер лишь рассылал пакет. Теперь **сервер (или хост) является единственным источником правды**. Клиент не может самостоятельно выставить или изменить роль — он только получает её с сервера.
+Java 21 — download
 
-### ✅ Сохранение ролей при переподключении
-Если игрок выходит и заходит снова — его роль **автоматически восстанавливается**. При заходе он получает уведомление в чат.
+Windows
 
-### ✅ Сохранение ролей в папку мира
-Файл `senseswap_roles.json` теперь хранится **внутри папки мира/сохранения**, а не в общей папке конфигов. Каждый мир/сервер хранит свои роли независимо.
-- Dedicated server: `<server_dir>/<world_name>/senseswap_roles.json`
-- Singleplayer: `<saves>/<world_name>/senseswap_roles.json`
+Download Gradle 8.6 → binary-only zip
+Unpack to C:\gradle-8.6
+Open terminal in the project folder and run:
 
-### ✅ Новые команды (бонус)
-| Команда | Описание |
-|---------|----------|
-| `/ss list` | Алиас для `/ss status` |
-| `/ss reload` | Перезагрузить роли с диска и разослать всем онлайн-игрокам |
+C:\gradle-8.6\bin\gradle.bat build
+Linux / Mac
 
-### ✅ Таймер сессии (бонус)
-`/ss status` теперь показывает, сколько времени идёт текущая игровая сессия.
+Install Gradle 8.6:
 
-### ✅ Серверная проверка микрофона (бонус)
-MUTE-проверка в VoicechatPlugin теперь происходит **на сервере** при получении микрофонного пакета. Это означает, что модифицированный клиент не может обойти заглушение микрофона.
+bashwget https://services.gradle.org/distributions/gradle-8.6-bin.zip
+unzip gradle-8.6-bin.zip
 
-### ✅ Пакет сброса роли
-Добавлен отдельный сетевой пакет `role_clear` — при `/ss stop` или `/ss clearrole` клиент явно получает команду сбросить свою роль, а не просто перестаёт её иметь.
+Build:
 
----
+bash./gradle-8.6/bin/gradle build
+If you already have Gradle 8.6 in PATH
+bashgradle build
+Output: build/libs/senseswap-3.0.0.jar
 
-## Структура проекта
+SenseSwap is a Fabric mod for Minecraft 1.21.1 that turns any multiplayer session into a chaotic and hilarious social challenge. Three players are assigned secret roles — Blind, Deaf, and Mute — each with a unique handicap that forces the team to communicate and cooperate in creative ways.
 
-```
-src/main/
-├── java/com/chalds/senseswap/
-│   ├── SenseSwapMod.java              — сервер: команды, хранение ролей, события
-│   ├── SenseSwapClientMod.java        — клиент: HUD, кнопка, приём пакетов
-│   ├── SenseSwapVoicechatPlugin.java  — голосовой чат (MUTE сервер-side!)
-│   ├── SenseSwapModMenuIntegration.java
-│   ├── config/
-│   │   └── ModConfig.java                 — клиентские настройки (JSON в .minecraft/config/)
-│   ├── gui/
-│   │   ├── SettingsScreen.java
-│   │   ├── RolePopupScreen.java
-│   │   └── RoleHudRenderer.java
-│   ├── mixin/
-│   │   ├── ChatHudMixin.java
-│   │   ├── InGameHudMixin.java
-│   │   ├── SubtitlesHudMixin.java
-│   │   └── HotbarHudMixin.java
-│   ├── network/
-│   │   └── RoleNetworking.java            — два пакета: role + role_clear
-│   └── server/
-│       └── RoleManager.java               — NEW: сохранение/загрузка ролей в папку мира
-└── resources/
-    ├── fabric.mod.json
-    ├── senseswap.mixins.json
-    └── assets/senseswap/
-        ├── lang/
-        │   ├── en_us.json
-        │   ├── ru_ru.json
-        │   └── kk_kz.json
-        └── textures/
-            └── logo.png
-```
+How it works
+An admin runs /ss start and the mod automatically assigns one of three roles to each player:
 
----
+🔴 Blind — your screen is covered in darkness. You can see almost nothing.
+🔵 Deaf — all voice chat audio is completely blocked. You cannot hear your teammates.
+🟢 Mute — your microphone is silenced. You cannot speak at all.
 
-## Команды (требует OP уровень 2)
+The catch? You still need to work together to survive or complete objectives. Figure out how to communicate when one of you can't see, one can't hear, and one can't talk.
 
-| Команда | Описание |
-|---------|----------|
-| `/ss start` | Запустить игру, случайно распределить роли (нужно ≥3 игроков) |
-| `/ss stop` | Остановить игру, убрать все роли |
-| `/ss setrole <игрок> <BLIND\|DEAF\|MUTE>` | Назначить роль вручную |
-| `/ss clearrole <игрок>` | Убрать роль у игрока |
-| `/ss status` | Показать текущие роли + время сессии |
-| `/ss list` | То же, что status |
-| `/ss reload` | Перезагрузить роли с диска |
+Features
 
-## Горячие клавиши
+Automatic random role assignment with /ss start
+Full Simple Voice Chat integration — Mute blocks your mic, Deaf blocks incoming audio at the engine level
+Roles are server-authoritative — clients cannot spoof or change their own role
+Roles persist across reconnects — rejoin and your role is automatically restored
+Roles saved per-world in senseswap_roles.json
+In-game HUD overlay showing your current role
+Role popup screen shown when you receive a role
+Full settings GUI (press K) — adjust HUD position, scale, fog intensity, and more
+ModMenu support — configure the mod from the mods list
+Config saved to config/senseswap.json
 
-| Клавиша | Действие |
-|---------|----------|
-| `K` | Открыть настройки мода |
 
-## Сборка
+Languages
 
-```bash
-./gradlew build
-```
+🇬🇧 English
+🇷🇺 Русский (Russian)
+🇰🇿 Қазақша (Kazakh)
 
-Файл мода: `build/libs/senseswap-3.0.0.jar`
 
-## Зависимости
+Requirements
 
-- Fabric Loader ≥ 0.15.0
-- Fabric API
-- Simple Voice Chat
-- ModMenu (опционально)
+Fabric Loader ≥ 0.15.0
+Fabric API
+Simple Voice Chat
 
-## Два конфиг-файла
+Optional: ModMenu
 
-| Файл | Где | Что хранит |
-|------|-----|------------|
-| `.minecraft/config/senseswap.json` | Клиент | HUD настройки, попап, визуальные эффекты |
-| `<world>/senseswap_roles.json` | Сервер/мир | UUID → роль (авторитативный источник) |
+Commands (requires OP level 2)
+CommandDescription/ss startStart the game and assign roles randomly/ss stopStop the game and clear all roles/ss setrole <player> <BLIND|DEAF|MUTE>Manually assign a role/ss clearrole <player>Remove a player's role/ss statusShow current role assignments/ss listAlias for status/ss reloadReload roles from world save
+
+Made by ChaldS
