@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "id": "senseswap",
-  "version": "5.0.0",
+  "version": "4.0.0",
   "name": "SenseSwap",
-  "description": "SenseSwap v5.0.0: spin wheel, day summary, duo mode, multi-version",
+  "description": "SenseSwap v4.0.0: spin wheel, day summary, duo mode, multi-version",
   "authors": [
     {
       "name": "ChaldS"

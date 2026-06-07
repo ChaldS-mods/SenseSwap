@@ -7,7 +7,7 @@ subprojects {
     apply plugin: 'maven-publish'
 
     group = 'com.chalds'
-    version = '5.0.0'
+    version = '4.0.0'
 
     java {
         toolchain { languageVersion = JavaLanguageVersion.of(21) }
