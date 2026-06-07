@@ -171,6 +171,7 @@ public class WheelSpinScreen extends Screen {
         ctx.drawTexture(getWheelTexture(),
             -size/2, -size/2, 0, 0, size, size, size, size);
         ctx.getMatrices().pop();
+        }
 
         // Pointer
         int pW = 36, pH = 48;

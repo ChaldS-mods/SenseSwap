@@ -113,6 +113,6 @@ public class SenseSwapClientMod implements ClientModInitializer {
             }
         });
 
-        System.out.println("[SenseSwap] v" + SenseSwapMod.VERSION + " Client v5 initialized.");
+        System.out.println("[SenseSwap] v" + SenseSwapMod.VERSION + " Client v4 initialized.");
     }
 }

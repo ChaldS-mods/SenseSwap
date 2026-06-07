@@ -27,7 +27,21 @@ subprojects {
     }
 
     jar {
-        archiveBaseName = "senseswap-${project.name.replace('v', '').replace('_', '.').replaceAll('\.0$', '')}"
+        archiveFileName = 'senseswap-' + project.name.replace('v', '').replace('_', '.').replaceAll(/\.0$/, '') + '-4.0.0.jar'
         from('LICENSE') { rename { "${it}_senseswap" } }
+    }
+}
+
+subprojects {
+    task renameJar(dependsOn: jar) {
+        doLast {
+            def mcVer = project.name.replace('v', '').replace('_', '.').replaceAll(/\.0$/, '')
+            def libsDir = new File(project.buildDir, 'libs')
+            libsDir.listFiles().each { f ->
+                if (f.name.endsWith('.jar') && !f.name.endsWith('-sources.jar')) {
+                    f.renameTo(new File(libsDir, 'senseswap-' + mcVer + '-4.0.0.jar'))
+                }
+            }
+        }
     }
 }

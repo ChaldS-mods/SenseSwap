@@ -20,6 +20,7 @@ public class PhaseManager {
     private int roundNumber = 1;
 
     private final Map<UUID, Integer> prevScores = new HashMap<>();
+    private final Map<UUID, SenseSwapMod.Role> prevRoles = new HashMap<>();
 
     private static PhaseManager instance = null;
     public static PhaseManager getInstance() { return instance; }
@@ -69,7 +70,8 @@ public class PhaseManager {
             p.sendMessage(Text.translatable("senseswap.phase.rest_start").formatted(Formatting.AQUA), false);
         }
 
-        playerRoles.forEach((uuid, role) -> {});
+        prevRoles.clear();
+        prevRoles.putAll(playerRoles);
         playerRoles.clear();
         RoleManager.saveRoles(server, playerRoles);
         broadcastPhase(server);
@@ -88,13 +90,28 @@ public class PhaseManager {
         if (ModConfig.get().duoMode) {
             assignDuoRoles(server, playerRoles, players);
         } else {
-            SenseSwapMod.Role[] roles = useDizzy
-                ? new SenseSwapMod.Role[]{SenseSwapMod.Role.BLIND, SenseSwapMod.Role.DEAF,
-                                           SenseSwapMod.Role.MUTE,  SenseSwapMod.Role.DIZZY}
-                : new SenseSwapMod.Role[]{SenseSwapMod.Role.BLIND, SenseSwapMod.Role.DEAF,
-                                           SenseSwapMod.Role.MUTE};
-            for (int i = 0; i < roles.length && i < players.size(); i++) {
-                playerRoles.put(players.get(i).getUuid(), roles[i]);
+            List<SenseSwapMod.Role> rolePool = new ArrayList<>(useDizzy
+                ? List.of(SenseSwapMod.Role.BLIND, SenseSwapMod.Role.DEAF,
+                          SenseSwapMod.Role.MUTE,  SenseSwapMod.Role.DIZZY)
+                : List.of(SenseSwapMod.Role.BLIND, SenseSwapMod.Role.DEAF,
+                          SenseSwapMod.Role.MUTE));
+            // Shuffle until no player gets the same role as last round
+            for (int attempt = 0; attempt < 20; attempt++) {
+                Collections.shuffle(rolePool);
+                boolean anyRepeat = false;
+                for (int i = 0; i < players.size() && i < rolePool.size(); i++) {
+                    SenseSwapMod.Role prev = prevRoles.get(players.get(i).getUuid());
+                    if (prev != null && prev == rolePool.get(i)) {
+                        anyRepeat = true;
+                        break;
+                    }
+                }
+                if (!anyRepeat) break;
+            }
+            prevRoles.clear();
+            for (int i = 0; i < rolePool.size() && i < players.size(); i++) {
+                playerRoles.put(players.get(i).getUuid(), rolePool.get(i));
+                prevRoles.put(players.get(i).getUuid(), rolePool.get(i));
             }
         }
 
