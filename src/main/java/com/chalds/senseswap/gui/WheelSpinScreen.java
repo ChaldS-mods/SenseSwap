@@ -315,4 +315,6 @@ public class WheelSpinScreen extends Screen {
 
     @Override public boolean shouldPause()      { return false; }
     @Override public boolean shouldCloseOnEsc() { return false; }
+
+    @Override public void applyBlur() {}
 }

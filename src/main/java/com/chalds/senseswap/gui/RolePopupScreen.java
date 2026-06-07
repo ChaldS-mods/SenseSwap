@@ -93,4 +93,6 @@ public class RolePopupScreen extends Screen {
     public boolean shouldPause() {
         return false;
     }
+
+    @Override public void applyBlur() {}
 }
