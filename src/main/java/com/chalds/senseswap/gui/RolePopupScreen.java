@@ -94,5 +94,5 @@ public class RolePopupScreen extends Screen {
         return false;
     }
 
-    @Override public void applyBlur() {}
+    @Override protected void applyBlur(float blurRadius) {}
 }
