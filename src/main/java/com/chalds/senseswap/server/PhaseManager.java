@@ -95,18 +95,22 @@ public class PhaseManager {
                           SenseSwapMod.Role.MUTE,  SenseSwapMod.Role.DIZZY)
                 : List.of(SenseSwapMod.Role.BLIND, SenseSwapMod.Role.DEAF,
                           SenseSwapMod.Role.MUTE));
-            // Shuffle until no player gets the same role as last round
-            for (int attempt = 0; attempt < 20; attempt++) {
-                Collections.shuffle(rolePool);
+            // Build list of prev roles in player order, then rotate so nobody gets same role
+            Collections.shuffle(players);
+            List<SenseSwapMod.Role> prevList = new ArrayList<>();
+            for (ServerPlayerEntity p : players) {
+                SenseSwapMod.Role prev = prevRoles.get(p.getUuid());
+                prevList.add(prev != null ? prev : rolePool.get(0));
+            }
+            Collections.shuffle(rolePool);
+            // Rotate rolePool until no player gets same role as before
+            for (int attempt = 0; attempt < rolePool.size(); attempt++) {
                 boolean anyRepeat = false;
                 for (int i = 0; i < players.size() && i < rolePool.size(); i++) {
-                    SenseSwapMod.Role prev = prevRoles.get(players.get(i).getUuid());
-                    if (prev != null && prev == rolePool.get(i)) {
-                        anyRepeat = true;
-                        break;
-                    }
+                    if (rolePool.get(i) == prevList.get(i)) { anyRepeat = true; break; }
                 }
                 if (!anyRepeat) break;
+                Collections.rotate(rolePool, 1);
             }
             prevRoles.clear();
             for (int i = 0; i < rolePool.size() && i < players.size(); i++) {
