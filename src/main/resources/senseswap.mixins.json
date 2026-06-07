@@ -6,7 +6,8 @@
     "InGameHudMixin",
     "SubtitlesHudMixin",
     "ChatHudMixin",
-    "HotbarHudMixin"
+    "HotbarHudMixin",
+    "NoBlurMixin"
   ],
   "injectors": {
     "defaultRequire": 1
