@@ -20,7 +20,7 @@ public class PhaseManager {
     private int roundNumber = 1;
 
     private final Map<UUID, Integer> prevScores = new HashMap<>();
-    private final Map<UUID, SenseSwapMod.Role> prevRoles = new HashMap<>();
+    private static final Map<UUID, SenseSwapMod.Role> prevRoles = new HashMap<>();
 
     private static PhaseManager instance = null;
     public static PhaseManager getInstance() { return instance; }
