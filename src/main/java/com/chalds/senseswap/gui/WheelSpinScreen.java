@@ -164,7 +164,7 @@ public class WheelSpinScreen extends Screen {
 
         // Spinning wheel
         ctx.getMatrices().push();
-        ctx.getMatrices().translate(cx, cy, 0);
+        ctx.getMatrices().translate(cx, cy, 500);
         ctx.getMatrices().multiply(
             net.minecraft.util.math.RotationAxis.POSITIVE_Z
                 .rotationDegrees(spinAngle * 0.1f));
