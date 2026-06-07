@@ -27,7 +27,7 @@ subprojects {
     }
 
     jar {
-        archiveBaseName = "senseswap-${project.name}"
+        archiveBaseName = "senseswap-${project.name.replace('v', '').replace('_', '.').replaceAll('\.0$', '')}"
         from('LICENSE') { rename { "${it}_senseswap" } }
     }
 }
