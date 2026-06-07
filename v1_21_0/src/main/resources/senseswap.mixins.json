@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.chalds.senseswap.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "InGameHudMixin",
+    "SubtitlesHudMixin",
+    "ChatHudMixin",
+    "HotbarHudMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
