@@ -6,3 +6,4 @@ dependencies {
     modCompileOnly "de.maxhenkel.voicechat:voicechat-api:2.5.27"
     modCompileOnly "com.terraformersmc:modmenu:11.0.0"
 }
+jar { archiveFileName = 'senseswap-1.21.1-4.0.0.jar' }
